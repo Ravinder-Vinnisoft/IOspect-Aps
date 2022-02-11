@@ -1,0 +1,44 @@
+<!--Navbar-->
+<mdb-navbar *ngIf="userLoggedIn" SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
+  <!-- Navbar brand -->
+  <mdb-navbar-brand>
+    <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+      <img
+        src="https://media-exp1.licdn.com/dms/image/C4D0BAQF41bQU3KYVtg/company-logo_200_200/0/1600689936961?e=2159024400&v=beta&t=jB8yFjyyz8X_-0tHbjDtu6w0r2iB28NJSm9JIVajdaY"
+        height="40" alt="" loading="lazy" style="margin-top: 2px;" />
+    </a>
+  </mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" [routerLink]="['/home']" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active ml-3">
+        <a class="nav-link waves-light" [routerLink]="['/profile']" mdbWavesEffect>Profile</a>
+      </li>
+
+    </ul>
+    <!-- Links -->
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" (click)="logOut()">Logout</a>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->

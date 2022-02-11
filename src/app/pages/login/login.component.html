@@ -1,0 +1,27 @@
+<!-- Default form login -->
+<form class="text-center border border-light p-5 login-form " [formGroup]="loginForm">
+
+  <p class="h4 mb-4">Sign in</p>
+
+  <!-- Email -->
+  <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" formControlName= "email"
+  [ngClass]="{'error' : controls['email'].errors && (controls['email'].touched || controls['email'].dirty)}">
+ <span class="error" *ngIf="controls.email.errors?.required && (controls.email.touched || controls.email.dirty)">
+   {{ validationMessages.email.required }}
+ </span>
+ <span class="error" *ngIf="controls.email.errors?.email && (controls.email.touched || controls.email.dirty)">
+   {{ validationMessages.email.email }}
+ </span>
+  <div class="d-flex justify-content-around">
+    <div>
+      <!-- Remember me -->
+      <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
+    </div>
+  </div>
+
+  <!-- Sign in button -->
+  <button mdbBtn color="info" [block]="true" class="my-4" type="submit" [disabled]="loginForm.invalid" (click)="login()">Sign
+    in</button>
+
+</form>
+<!-- Default form login -->

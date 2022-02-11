@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+.error {
+  color: red;
+}
+
+.btn-primary {
+  background-color: #2bbbad !important;
+  border: #2bbbad !important;
+}
+
+.btn-outline-primary {
+  border: 1px solid #2bbbad !important;
+  color: #2bbbad !important;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .ngx-pagination {
+    text-align: center !important;
+    height: 50px !important;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .ngx-pagination {
+    text-align: center !important;
+    height: 50px !important;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .ngx-pagination {
+    text-align: center !important;
+    height: 50px !important;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .ngx-pagination {
+    text-align: center !important;
+    height: 50px !important;
+    width: 40% !important;
+    position: relative !important;
+    left: 30% !important;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .ngx-pagination {
+    text-align: center !important;
+    height: 50px !important;
+    width: 40% !important;
+    position: relative !important;
+    left: 30% !important;
+  }
+}
