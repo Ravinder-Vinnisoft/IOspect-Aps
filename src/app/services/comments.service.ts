@@ -29,6 +29,11 @@ export class CommentsService {
       .pipe(catchError(this.handleError));
   }
 
+  getAllcomments(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/comments`)
+      .pipe(catchError(this.handleError));
+  }
+
   handleError(error: HttpErrorResponse) {
     return throwError(() => error.error || "Server Error");
   };

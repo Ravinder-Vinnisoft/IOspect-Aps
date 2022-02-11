@@ -5,7 +5,8 @@
 
 <div
   *ngFor="let post of posts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage } let i = index;">
-  <app-posts [post]="post" (onDelete)="deletePost(i)"></app-posts>
+  <app-posts [post]="post" (onDelete)="deletePost(i)" [comments]="comments">
+  </app-posts>
 </div>
 <pagination-controls *ngIf="posts && posts.length" (pageChange)="currentPage = $event"></pagination-controls>
 

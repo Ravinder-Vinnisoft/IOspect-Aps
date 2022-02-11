@@ -8,19 +8,25 @@ import { map } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
+import { CommentsService } from 'src/app/services/comments.service';
+import { Comment } from 'src/app/models/comment.model';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class HomeComponent implements OnInit {
   @ViewChild('basicModal') addPostModal: any;
 
   public posts: Post[] = [];
   public users: User[] = [];
+  public comments: Comment[] = [];
+
   reducedUsers: any = [];
+  reducedComments: any= [];
 
   loggedInUser = this.authService.getLoggedInUser();
   currentPage: any= 1;
@@ -35,6 +41,7 @@ export class HomeComponent implements OnInit {
     private postsService: PostsService,
     private authService: AuthenticationService,
     private userService: UsersService,
+    private commentsService: CommentsService,
     private router: Router,
     private spinner: NgxSpinnerService,
     private toaster: ToastrService,
@@ -74,8 +81,7 @@ export class HomeComponent implements OnInit {
 
           return acc
         }, {})
-
-        this.getPosts();
+        this.getAllCommnets();
       })
     } catch (ex) {
       console.log(ex);
@@ -89,6 +95,19 @@ export class HomeComponent implements OnInit {
       })).subscribe(posts => {
         this.spinner.hide();
         this.posts = posts;
+      })
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  getAllCommnets() {
+    try {
+      this.commentsService.getAllcomments().pipe(map((response) => {
+        return response.map((comment: Comment) => new Comment(comment.postId, comment.id, comment.name, comment.email, comment.body));
+      })).subscribe(comments => {
+        this.comments = comments;
+        this.getPosts();
       })
     } catch (ex) {
       console.log(ex);

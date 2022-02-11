@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -23,6 +23,7 @@ export class CommentsComponent implements OnInit {
   comments: Comment[] = [];
   newComment: any;
   contentEditable: string = "false";
+  @Output() onComment: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private commentsService: CommentsService,
@@ -85,6 +86,7 @@ export class CommentsComponent implements OnInit {
           this.toaster.success("Comment added successfully.", 'Success', {
             timeOut: 3000,
           });
+          this.onComment.emit(response);
           this.comments.push(response);
         } else {
           this.toaster.error("Error", 'Error', {

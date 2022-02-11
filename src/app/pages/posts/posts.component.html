@@ -30,20 +30,17 @@
       </mdb-card-text>
 
       <a type="button" aria-expanded="true" aria-controls="collapseExample-5"
-        (click)="showComments = !showComments">Comments</a>
-
+        (click)="showComments = !showComments">Comments ({{commentsCount}})</a>
 
       <a class="comment" *ngIf="post.user.isLoggedIn" type="button" aria-expanded="true" (click)="onClickEdit()"
         aria-controls="collapseExample-5">Edit</a>
       <a class="comment" *ngIf="post.user.isLoggedIn && !showSaveButton" type="button" aria-expanded="true"
-        (click)="basicModal.show()"
-        aria-controls="collapseExample-5">Delete</a>
+        (click)="basicModal.show()" aria-controls="collapseExample-5">Delete</a>
 
-        <a class="comment" *ngIf="post.user.isLoggedIn && showSaveButton" type="button" aria-expanded="true"
-          (click)="onClickSave()"
-          aria-controls="collapseExample-5">Save</a>
+      <a class="comment" *ngIf="post.user.isLoggedIn && showSaveButton" type="button" aria-expanded="true"
+        (click)="onClickSave()" aria-controls="collapseExample-5">Save</a>
       <div *ngIf="showComments">
-        <app-comments [postId]="post.id"></app-comments>
+        <app-comments [postId]="post.id" (onComment)="onComment($event)"></app-comments>
       </div>
 
     </mdb-card-body>

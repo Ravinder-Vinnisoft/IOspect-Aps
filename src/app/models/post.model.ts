@@ -5,7 +5,7 @@ export class Post {
     id: number;
     title: string;
     body: string;
-    user: User
+    user: User;
 
     constructor(userId: number, id: number, title: string, body: string, user: User) {
         this.userId = userId;

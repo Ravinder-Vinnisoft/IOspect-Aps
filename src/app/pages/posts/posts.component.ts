@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Comment } from 'src/app/models/comment.model';
 import { Post } from 'src/app/models/post.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CommentsService } from 'src/app/services/comments.service';
@@ -18,10 +19,13 @@ export class PostsComponent implements OnInit {
 
   showComments: boolean = false;
   @Input() post: Post | any;
-  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();;
+  @Input() comments: Comment[] | any;
+
+  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
   
   newComment: any;
   showSaveButton: boolean= false;
+  commentsCount: number= 0;
 
   constructor(
     private commentsService: CommentsService,
@@ -32,6 +36,7 @@ export class PostsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.countComments();
   }
 
   deletePost() {
@@ -57,6 +62,17 @@ export class PostsComponent implements OnInit {
     }
   }
 
+  countComments() {
+    this.comments.filter((comment: Comment) => {
+      if(this.post.id === comment.postId) {
+        return this.commentsCount++;
+      } else {
+        return;
+      }
+    })
+    this.spinner.hide()
+  }
+
   onClickEdit() {
     this.editTitle.nativeElement.contentEditable= "true";
     this.editBody.nativeElement.contentEditable = "true";
@@ -77,5 +93,12 @@ export class PostsComponent implements OnInit {
     this.editBody.nativeElement.contentEditable = "false";
     this.showSaveButton = false;
 
+  }
+
+  onComment(comment: any) {
+    this.spinner.show();
+    this.comments.push(comment);
+    this.commentsCount= 0;
+    this.countComments();
   }
 }
